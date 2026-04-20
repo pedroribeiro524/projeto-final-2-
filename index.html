@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PedroTech</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: white;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(15,23,42,0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+header h1 {
+  color: #38bdf8;
+}
+
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #cbd5f5;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #38bdf8;
+}
+
+.dev {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* MAIN */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+}
+
+/* CARD */
+.card {
+  background: rgba(30,41,59,0.6);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 15px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(56,189,248,0.1);
+  animation: fadeIn 0.6s ease;
+}
+
+.card h2 {
+  margin-bottom: 20px;
+}
+
+/* INPUT */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #38bdf8;
+}
+
+/* SECTIONS */
+section {
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+/* TEXT */
+h2 {
+  margin-bottom: 15px;
+}
+
+p {
+  color: #cbd5f5;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>PedroTech</h1>
+
+  <nav>
+    <a href="#" onclick="mostrarPagina('home')">Home</a>
+    <a href="#" onclick="mostrarPagina('criadores')">Criadores</a>
+    <a href="#" onclick="mostrarPagina('sobre')">Sobre</a>
+  </nav>
+
+  <span class="dev">Desenvolvido por Pedro</span>
+</header>
+
+<main>
+
+<!-- LOGIN -->
+<section id="login" class="card">
+  <h2>Login</h2>
+  <input type="text" id="user" placeholder="Usuário">
+  <input type="password" id="pass" placeholder="Senha">
+  <button onclick="login()">Entrar</button>
+  <button onclick="criarConta()">Criar Conta</button>
+</section>
+
+<!-- HOME -->
+<section id="home" class="hidden">
+  <h2>Bem-vindo 👋</h2>
+  <p>Área do sistema em desenvolvimento...</p>
+</section>
+
+<!-- CRIADORES -->
+<section id="criadores" class="hidden">
+  <h2>Criadores</h2>
+  <p>Pedro — Desenvolvedor do PedroTech</p>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="hidden">
+  <h2>Sobre</h2>
+  <p>
+    O PedroTech é uma plataforma tecnológica focada em inovação,
+    desenvolvimento web e soluções modernas para o futuro.
+  </p>
+</section>
+
+</main>
+
+<script>
+function login() {
+  let user = document.getElementById("user").value;
+  let pass = document.getElementById("pass").value;
+
+  if (localStorage.getItem(user) === pass) {
+    entrarSistema();
+  } else {
+    alert("Usuário ou senha incorretos");
+  }
+}
+
+function criarConta() {
+  let user = document.getElementById("user").value;
+  let pass = document.getElementById("pass").value;
+
+  if (user && pass) {
+    localStorage.setItem(user, pass);
+    alert("Conta criada com sucesso!");
+  } else {
+    alert("Preencha os campos");
+  }
+}
+
+function entrarSistema() {
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+}
+
+function mostrarPagina(pagina) {
+  let secoes = ["home", "criadores", "sobre"];
+  
+  secoes.forEach(sec => {
+    document.getElementById(sec).classList.add("hidden");
+  });
+
+  document.getElementById(pagina).classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
